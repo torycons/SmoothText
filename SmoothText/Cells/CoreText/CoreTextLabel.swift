@@ -24,12 +24,16 @@ final class CoreTextLabel: UITableViewCell {
     ctView.delegate = self
     ctView.configure(textData: data)
   }
+
+  override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+    layoutIfNeeded()
+    return super.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+  }
 }
 
 extension CoreTextLabel: CTViewDelegate {
   func updateView(size: CGSize) {
     ctWidth.constant = size.width
     ctHeight.constant = size.height
-    layoutIfNeeded()
   }
 }

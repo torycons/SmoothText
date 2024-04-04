@@ -49,7 +49,7 @@ protocol TextCache {
   func clearAllCacheData()
 }
 
-struct TextData {
+struct TextData: Equatable {
   let attrString: NSAttributedString
   let width: CGFloat
   let frame: CTFrame

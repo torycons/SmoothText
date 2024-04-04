@@ -9,13 +9,32 @@ import UIKit
 
 final class TextUILabelCell: UITableViewCell {
   @IBOutlet weak var lbLabel: UILabel!
-  @IBOutlet weak var vBubble: UIView! {
-    didSet {
-      vBubble.layer.cornerRadius = 16
-    }
-  }
 
   func configure(text: String) {
     lbLabel.attributedText = NSAttributedString(string: text)
+  }
+}
+
+final class TestUILabel: UILabel {
+  override func drawText(in rect: CGRect) {
+    if let attributedText {
+      let textData = TextUtility.shared.getTextData(attrString: attributedText, width: bounds.width)
+      guard let context = UIGraphicsGetCurrentContext() else { return }
+      context.textMatrix = .identity
+      context.translateBy(x: 0, y: textData.size.height)
+      context.scaleBy(x: 1.0, y: -1.0)
+      CTFrameDraw(textData.frame, context)
+    } else {
+      super.drawText(in: rect)
+    }
+  }
+
+  override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+    if let attributedText {
+      let textData = TextUtility.shared.getTextData(attrString: attributedText, width: bounds.width)
+      return CGRect(x: 0, y: 0, width: textData.size.width, height: textData.size.height)
+    } else {
+      return super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
+    }
   }
 }

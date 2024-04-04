@@ -21,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="196"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="393" id="LkC-Hl-4B2"/>
-                            <constraint firstAttribute="height" constant="196" id="WIs-rQ-0bd"/>
+                            <constraint firstAttribute="width" priority="999" constant="393" id="LkC-Hl-4B2"/>
+                            <constraint firstAttribute="height" priority="999" constant="196" id="WIs-rQ-0bd"/>
                         </constraints>
                     </view>
                 </subviews>

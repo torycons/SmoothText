@@ -27,9 +27,9 @@ final class ViewController: UIViewController {
     super.viewDidLoad()
     serialQueue.async { [weak self] in
       guard let self else { return }
-      for i in 0...20 {
+      for i in 0...100 {
         let data = data[i % data.count]
-        cells.append(TextUtility.shared.getTextData(attrString: NSAttributedString(string: data), width: 414))
+        cells.append(TextUtility.shared.getTextData(attrString: NSAttributedString(string: data), width: UIScreen.main.bounds.width))
       }
       DispatchQueue.main.async { [weak self] in
         guard let self else { return }
@@ -63,11 +63,18 @@ extension ViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CoreTextLabel.self), for: indexPath) as? CoreTextLabel {
-      cell.configure(data: cells[indexPath.row])
-      cell.delegate = self
+//    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CoreTextLabel.self), for: indexPath) as? CoreTextLabel {
+//      cell.configure(data: cells[indexPath.row])
+//      cell.delegate = self
+//      return cell
+//    }
+
+    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextUILabelCell.self), for: indexPath) as? TextUILabelCell {
+      cell.configure(text: cells[indexPath.row].attrString.string)
       return cell
     }
+
+
     return UITableViewCell()
   }
 }

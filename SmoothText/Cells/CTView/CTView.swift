@@ -14,9 +14,8 @@ protocol CTViewDelegate: AnyObject {
 
 final class CTView: ConstraintUIView {
   private var textData: TextData?
-  private var preferredMaxLayoutWidth: CGFloat = 0
-//  private var invalidateContentSize = false
-  private var currentWidth: CGFloat = 0
+  private var currentBounds: CGRect = .zero
+  private var shouldUpdateText: Bool = false
 
   weak var delegate: CTViewDelegate?
 
@@ -31,17 +30,28 @@ final class CTView: ConstraintUIView {
   }
 
   func configure(textData: TextData) {
-//    let currentWidth = bounds.width
-//    let textData = TextUtility.shared.getTextData(attrString: data, width: currentWidth)
-//    let shouldUpdate = self.currentWidth == 0 || textData.width != currentWidth
+    let textData = TextUtility.shared.getTextData(attrString: textData.attrString, width: bounds.width)
+    shouldUpdateText = textData != self.textData || currentBounds != bounds
     self.textData = textData
-//    self.currentWidth = currentWidth
-//    self.invalidateContentSize = shouldUpdate
+  }
+
+  func updateText() {
+    guard let textData else { return }
     UIView.performWithoutAnimation {
-      self.delegate?.updateView(size: textData.size)
       self.invalidateIntrinsicContentSize()
+      self.delegate?.updateView(size: textData.size)
       self.setNeedsDisplay()
     }
+  }
+
+  override func layoutSubviews() {
+    if let textData, shouldUpdateText {
+      currentBounds = bounds
+      configure(textData: textData)
+      updateText()
+      shouldUpdateText = false
+    }
+    super.layoutSubviews()
   }
 
   override var intrinsicContentSize: CGSize {
