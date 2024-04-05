@@ -28,17 +28,37 @@ final class TextUtility {
   }
 
   func getTextData(attrString: NSAttributedString, width: CGFloat) -> TextData {
-    if let data = cache.get(key: attrString, width: width) {
-        return data
+    if let data = self.cache.get(key: attrString, width: width) {
+      return data
     } else {
-        let size = calculateFrameSize(attrString: attrString, width: width)
+      let size = self.calculateFrameSize(attrString: attrString, width: width)
+      let framesetter = CTFramesetterCreateWithAttributedString(attrString as CFAttributedString)
+      let path = CGMutablePath()
+      path.addRect(CGRect(origin: .zero, size: size))
+      let ctFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attrString.length), path, nil)
+      let textData = TextData(attrString: attrString, width: width, frame: ctFrame, size: size)
+      self.cache.update(key: attrString, width: width, textData: textData)
+      return textData
+    }
+  }
+
+  func getTextData(attrString: NSAttributedString, width: CGFloat, completion: @escaping (TextData) -> Void) -> TextData? {
+    if let data = self.cache.get(key: attrString, width: width) {
+      return data
+    } else {
+      textDataQueue.async {
+        let size = self.calculateFrameSize(attrString: attrString, width: width)
         let framesetter = CTFramesetterCreateWithAttributedString(attrString as CFAttributedString)
         let path = CGMutablePath()
         path.addRect(CGRect(origin: .zero, size: size))
         let ctFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attrString.length), path, nil)
         let textData = TextData(attrString: attrString, width: width, frame: ctFrame, size: size)
-        cache.update(key: attrString, width: width, textData: textData)
-        return textData
+        self.cache.update(key: attrString, width: width, textData: textData)
+        DispatchQueue.main.async {
+          completion(textData)
+        }
+      }
+      return nil
     }
   }
 }
@@ -86,8 +106,8 @@ final class TextCacheImp: TextCache {
 }
 
 extension CGSize: Hashable {
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(width)
-        hasher.combine(height)
-    }
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(width)
+    hasher.combine(height)
+  }
 }

@@ -31,15 +31,17 @@ final class CTView: ConstraintUIView {
 
   func configure(textData: TextData) {
     let firstTime = self.textData == nil
-    let textData = TextUtility.shared.getTextData(attrString: textData.attrString, width: bounds.width)
-    shouldUpdateText = textData != self.textData || currentBounds != bounds
-    self.textData = textData
+    TextUtility.shared.getTextData(attrString: textData.attrString, width: bounds.width, completion: { [weak self] textData in
+      guard let self else { return }
+      shouldUpdateText = textData != self.textData || currentBounds != bounds
+      self.textData = textData
 
-    if !firstTime, shouldUpdateText {
-      currentBounds = bounds
-      updateText()
-      shouldUpdateText = false
-    }
+      if !firstTime, shouldUpdateText {
+        currentBounds = bounds
+        updateText()
+        shouldUpdateText = false
+      }
+    })
   }
 
   func updateText() {

@@ -27,7 +27,7 @@ final class ViewController: UIViewController {
     super.viewDidLoad()
     serialQueue.async { [weak self] in
       guard let self else { return }
-      for i in 0...100 {
+      for i in 0...50 {
         let data = data[i % data.count]
         cells.append(TextUtility.shared.getTextData(attrString: NSAttributedString(string: data), width: UIScreen.main.bounds.width))
       }
@@ -63,16 +63,18 @@ extension ViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CoreTextLabel.self), for: indexPath) as? CoreTextLabel {
-      cell.configure(data: cells[indexPath.row])
-      cell.delegate = self
-      return cell
-    }
-
-//    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextUILabelCell.self), for: indexPath) as? TextUILabelCell {
-//      cell.configure(text: cells[indexPath.row].attrString.string)
+//    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CoreTextLabel.self), for: indexPath) as? CoreTextLabel {
+//      cell.configure(data: cells[indexPath.row])
+//      cell.delegate = self
 //      return cell
 //    }
+
+    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextUILabelCell.self), for: indexPath) as? TextUILabelCell {
+      (cell.lbLabel as? TestUILabelAsync)?.delegate = self
+      cell.delegate = self
+      cell.configure(text: cells[indexPath.row].attrString.string)
+      return cell
+    }
 
 
     return UITableViewCell()
@@ -88,5 +90,13 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: CoreTextLabelDelegate {
   func updateTableView() {
     tableView.performBatchUpdates(nil)
+  }
+}
+
+extension ViewController: TestUILabelAsyncDelegate {
+  func update() {
+    UITableView.performWithoutAnimation {
+      tableView.performBatchUpdates(nil)
+    }
   }
 }
