@@ -30,22 +30,29 @@ final class CTView: ConstraintUIView {
   }
 
   func configure(textData: TextData) {
+    let firstTime = self.textData == nil
     let textData = TextUtility.shared.getTextData(attrString: textData.attrString, width: bounds.width)
     shouldUpdateText = textData != self.textData || currentBounds != bounds
     self.textData = textData
+
+    if !firstTime, shouldUpdateText {
+      currentBounds = bounds
+      updateText()
+      shouldUpdateText = false
+    }
   }
 
   func updateText() {
     guard let textData else { return }
     UIView.performWithoutAnimation {
-      self.invalidateIntrinsicContentSize()
+      sizeToFit()
       self.delegate?.updateView(size: textData.size)
       self.setNeedsDisplay()
     }
   }
 
   override func layoutSubviews() {
-    if let textData, shouldUpdateText {
+    if let textData, shouldUpdateText || currentBounds != bounds {
       currentBounds = bounds
       configure(textData: textData)
       updateText()
@@ -54,7 +61,7 @@ final class CTView: ConstraintUIView {
     super.layoutSubviews()
   }
 
-  override var intrinsicContentSize: CGSize {
+  override func sizeThatFits(_ size: CGSize) -> CGSize {
     return textData?.size ?? .zero
   }
 }

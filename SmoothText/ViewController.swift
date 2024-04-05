@@ -63,16 +63,16 @@ extension ViewController: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CoreTextLabel.self), for: indexPath) as? CoreTextLabel {
-//      cell.configure(data: cells[indexPath.row])
-//      cell.delegate = self
-//      return cell
-//    }
-
-    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextUILabelCell.self), for: indexPath) as? TextUILabelCell {
-      cell.configure(text: cells[indexPath.row].attrString.string)
+    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CoreTextLabel.self), for: indexPath) as? CoreTextLabel {
+      cell.configure(data: cells[indexPath.row])
+      cell.delegate = self
       return cell
     }
+
+//    if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextUILabelCell.self), for: indexPath) as? TextUILabelCell {
+//      cell.configure(text: cells[indexPath.row].attrString.string)
+//      return cell
+//    }
 
 
     return UITableViewCell()

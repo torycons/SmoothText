@@ -21,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="196"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="width" priority="999" constant="393" id="LkC-Hl-4B2"/>
-                            <constraint firstAttribute="height" priority="999" constant="196" id="WIs-rQ-0bd"/>
+                            <constraint firstAttribute="width" constant="393" id="Ikc-ue-qZ8"/>
+                            <constraint firstAttribute="height" constant="196" id="bi3-Bb-byQ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -34,9 +34,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="ctHeight" destination="WIs-rQ-0bd" id="G69-lJ-Pda"/>
+                <outlet property="ctHeight" destination="bi3-Bb-byQ" id="EO1-8C-ink"/>
                 <outlet property="ctView" destination="NdO-Fw-rIe" id="PO6-tR-cbF"/>
-                <outlet property="ctWidth" destination="LkC-Hl-4B2" id="EWw-pJ-1Mc"/>
+                <outlet property="ctWidth" destination="Ikc-ue-qZ8" id="O2g-bv-wEH"/>
             </connections>
             <point key="canvasLocation" x="287.78625954198475" y="-24.647887323943664"/>
         </tableViewCell>
