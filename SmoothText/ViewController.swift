@@ -71,7 +71,6 @@ extension ViewController: UITableViewDataSource {
 
     if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextUILabelCell.self), for: indexPath) as? TextUILabelCell {
       (cell.lbLabel as? TestUILabelAsync)?.delegate = self
-      cell.delegate = self
       cell.configure(text: cells[indexPath.row].attrString.string)
       return cell
     }
@@ -95,8 +94,8 @@ extension ViewController: CoreTextLabelDelegate {
 
 extension ViewController: TestUILabelAsyncDelegate {
   func update() {
-    UITableView.performWithoutAnimation {
+//    UITableView.performWithoutAnimation {
       tableView.performBatchUpdates(nil)
-    }
+//    }
   }
 }

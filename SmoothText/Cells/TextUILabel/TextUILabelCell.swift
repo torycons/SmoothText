@@ -10,12 +10,8 @@ import UIKit
 final class TextUILabelCell: UITableViewCell {
   @IBOutlet weak var lbLabel: UILabel!
 
-  weak var delegate: TestUILabelAsyncDelegate?
-
   func configure(text: String) {
     lbLabel.attributedText = NSAttributedString(string: text)
-
-    
   }
 }
 
