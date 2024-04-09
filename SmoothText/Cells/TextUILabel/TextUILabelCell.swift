@@ -8,10 +8,10 @@
 import UIKit
 
 final class TextUILabelCell: UITableViewCell {
-  @IBOutlet weak var lbLabel: UILabel!
+  @IBOutlet weak var lbLabel: AsyncUILabel!
 
-  func configure(text: String) {
-    lbLabel.attributedText = NSAttributedString(string: text)
+  func configure(text: NSAttributedString) {
+    lbLabel.attributedText = text
   }
 }
 

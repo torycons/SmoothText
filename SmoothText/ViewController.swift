@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
     "5 🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲🥲"
   ]
 
-  var cells: [TextData] = []
+  var cells: [NSAttributedString] = []
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,7 +29,10 @@ final class ViewController: UIViewController {
       guard let self else { return }
       for i in 0...50 {
         let data = data[i % data.count]
-        cells.append(TextUtility.shared.getTextData(attrString: NSAttributedString(string: data), width: UIScreen.main.bounds.width))
+        cells.append(AsyncUILabel.TextUtility.shared.detectLinkAndUpdateCacheData(
+          string: data,
+          checkingResultType: [.link],
+          width: UIScreen.main.bounds.width))
       }
       DispatchQueue.main.async { [weak self] in
         guard let self else { return }
@@ -70,8 +73,9 @@ extension ViewController: UITableViewDataSource {
 //    }
 
     if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TextUILabelCell.self), for: indexPath) as? TextUILabelCell {
-      (cell.lbLabel as? TestUILabelAsync)?.delegate = self
-      cell.configure(text: cells[indexPath.row].attrString.string)
+//      (cell.lbLabel as? TestUILabelAsync)?.delegate = self
+      cell.lbLabel.delegate = self
+      cell.configure(text: cells[indexPath.row])
       return cell
     }
 
@@ -97,5 +101,11 @@ extension ViewController: TestUILabelAsyncDelegate {
 //    UITableView.performWithoutAnimation {
       tableView.performBatchUpdates(nil)
 //    }
+  }
+}
+
+extension ViewController: AsyncUILabelDelegate {
+  func asynUILabel(didUpdateLabelWith label: AsyncUILabel) {
+    tableView.performBatchUpdates(nil)
   }
 }

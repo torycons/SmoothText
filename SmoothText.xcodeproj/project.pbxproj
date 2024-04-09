@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F325BB652BC52E8200EE489E /* AsyncUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB642BC52E8200EE489E /* AsyncUILabel.swift */; };
+		F325BB672BC52ED500EE489E /* AsyncUILabel+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB662BC52ED500EE489E /* AsyncUILabel+Actions.swift */; };
+		F325BB692BC52F5B00EE489E /* AsyncUILabel+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB682BC52F5B00EE489E /* AsyncUILabel+Delegate.swift */; };
+		F325BB6B2BC52F6F00EE489E /* AsyncUILabel+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB6A2BC52F6F00EE489E /* AsyncUILabel+Links.swift */; };
+		F325BB6D2BC52F8200EE489E /* AsyncUILabel+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB6C2BC52F8200EE489E /* AsyncUILabel+Cache.swift */; };
+		F336ED8A2BC5447100D830A8 /* AsyncUILabel+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F336ED892BC5447100D830A8 /* AsyncUILabel+Utility.swift */; };
 		F3B4324C2BAC42770055907B /* CoreTextLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B4324B2BAC42770055907B /* CoreTextLabel.xib */; };
 		F3B4324E2BAC427F0055907B /* CoreTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4324D2BAC427F0055907B /* CoreTextLabel.swift */; };
 		F3B432512BAC44530055907B /* CTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B432502BAC44530055907B /* CTView.swift */; };
@@ -24,6 +30,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F325BB642BC52E8200EE489E /* AsyncUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncUILabel.swift; sourceTree = "<group>"; };
+		F325BB662BC52ED500EE489E /* AsyncUILabel+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Actions.swift"; sourceTree = "<group>"; };
+		F325BB682BC52F5B00EE489E /* AsyncUILabel+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Delegate.swift"; sourceTree = "<group>"; };
+		F325BB6A2BC52F6F00EE489E /* AsyncUILabel+Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Links.swift"; sourceTree = "<group>"; };
+		F325BB6C2BC52F8200EE489E /* AsyncUILabel+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Cache.swift"; sourceTree = "<group>"; };
+		F336ED892BC5447100D830A8 /* AsyncUILabel+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Utility.swift"; sourceTree = "<group>"; };
 		F3B4324B2BAC42770055907B /* CoreTextLabel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoreTextLabel.xib; sourceTree = "<group>"; };
 		F3B4324D2BAC427F0055907B /* CoreTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTextLabel.swift; sourceTree = "<group>"; };
 		F3B432502BAC44530055907B /* CTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTView.swift; sourceTree = "<group>"; };
@@ -53,6 +65,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F325BB632BC52E5B00EE489E /* AsyncUILabel */ = {
+			isa = PBXGroup;
+			children = (
+				F325BB642BC52E8200EE489E /* AsyncUILabel.swift */,
+				F325BB662BC52ED500EE489E /* AsyncUILabel+Actions.swift */,
+				F325BB682BC52F5B00EE489E /* AsyncUILabel+Delegate.swift */,
+				F325BB6A2BC52F6F00EE489E /* AsyncUILabel+Links.swift */,
+				F325BB6C2BC52F8200EE489E /* AsyncUILabel+Cache.swift */,
+				F336ED892BC5447100D830A8 /* AsyncUILabel+Utility.swift */,
+			);
+			path = AsyncUILabel;
+			sourceTree = "<group>";
+		};
 		F3B432492BAC41EF0055907B /* TextUILabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +124,7 @@
 		F3C04D5C2BA9503100C617D4 /* SmoothText */ = {
 			isa = PBXGroup;
 			children = (
+				F325BB632BC52E5B00EE489E /* AsyncUILabel */,
 				F3C04D712BA952E700C617D4 /* Cells */,
 				F3C04D5D2BA9503100C617D4 /* AppDelegate.swift */,
 				F3C04D5F2BA9503100C617D4 /* SceneDelegate.swift */,
@@ -197,14 +223,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F325BB692BC52F5B00EE489E /* AsyncUILabel+Delegate.swift in Sources */,
 				F3C04D622BA9503100C617D4 /* ViewController.swift in Sources */,
 				F3B432512BAC44530055907B /* CTView.swift in Sources */,
 				F3B432552BAC44F40055907B /* ConstraintView.swift in Sources */,
 				F3C04D5E2BA9503100C617D4 /* AppDelegate.swift in Sources */,
+				F325BB652BC52E8200EE489E /* AsyncUILabel.swift in Sources */,
 				F3C04D602BA9503100C617D4 /* SceneDelegate.swift in Sources */,
+				F325BB6B2BC52F6F00EE489E /* AsyncUILabel+Links.swift in Sources */,
+				F336ED8A2BC5447100D830A8 /* AsyncUILabel+Utility.swift in Sources */,
 				F3F270B92BB6C0EE006FEC61 /* TextUtility.swift in Sources */,
+				F325BB672BC52ED500EE489E /* AsyncUILabel+Actions.swift in Sources */,
 				F3C04D752BA95D7F00C617D4 /* TextUILabelCell.swift in Sources */,
 				F3B4324E2BAC427F0055907B /* CoreTextLabel.swift in Sources */,
+				F325BB6D2BC52F8200EE489E /* AsyncUILabel+Cache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
