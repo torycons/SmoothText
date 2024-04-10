@@ -25,16 +25,6 @@ extension AsyncUILabel {
     }
 
     func detectLinkAndUpdateCacheData(
-      string: String,
-      checkingResultType: NSTextCheckingResult.CheckingType,
-      width: CGFloat) -> NSAttributedString {
-      return detectLinkAndUpdateCacheData(
-        attributedString: NSAttributedString(string: string),
-        checkingResultType: checkingResultType,
-        width: width)
-    }
-
-    func detectLinkAndUpdateCacheData(
       attributedString: NSAttributedString,
       checkingResultType: NSTextCheckingResult.CheckingType,
       width: CGFloat) -> NSAttributedString {

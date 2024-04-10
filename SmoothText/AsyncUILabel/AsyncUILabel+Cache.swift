@@ -28,11 +28,14 @@ extension AsyncUILabel {
       var sizes: [CGFloat: TextData] = [:]
     }
 
+    private let queue = DispatchQueue(label: "com.asynclabel.cache")
     private let cache: NSCache<NSAttributedString, CacheData> = NSCache()
 
     func update(key: NSAttributedString, width: CGFloat, textData: TextData) {
       if let data = cache.object(forKey: key) {
-        data.sizes[width] = textData
+        queue.async {
+          data.sizes[width] = textData
+        }
       } else {
         let newCacheData = CacheData()
         newCacheData.sizes[width] = textData
@@ -42,7 +45,9 @@ extension AsyncUILabel {
 
     func get(key: NSAttributedString, width: CGFloat) -> TextData? {
       if let data = cache.object(forKey: key) {
-        return data.sizes[width]
+        return queue.sync {
+          data.sizes[width]
+        }
       }
       return nil
     }
