@@ -50,7 +50,7 @@ extension AsyncUILabel {
       let path = CGMutablePath()
       path.addRect(CGRect(origin: .zero, size: size))
       let ctFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attrString.length), path, nil)
-      let textData = TextData(attrString: attrString, width: width, frame: ctFrame, size: size)
+      let textData = TextData(attrString: attrString, viewFullWidth: width, textFrame: ctFrame, textSize: size)
       self.cache.update(key: attrString, width: width, textData: textData)
       return textData
     }

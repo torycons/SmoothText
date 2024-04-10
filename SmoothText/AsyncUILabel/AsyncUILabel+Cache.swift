@@ -18,9 +18,9 @@ protocol AsyncUILabelTextCache {
 extension AsyncUILabel {
   struct TextData: Equatable {
     let attrString: NSAttributedString
-    let width: CGFloat
-    let frame: CTFrame
-    let size: CGSize
+    let viewFullWidth: CGFloat
+    let textFrame: CTFrame
+    let textSize: CGSize
   }
 
   final class TextCache: AsyncUILabelTextCache {

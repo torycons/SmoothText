@@ -59,12 +59,20 @@ extension AsyncUILabel {
 
       for link in links {
         let attributes = link.attributes
-
         guard let range = link.result?.range else {
           continue
         }
-
         attributedText.addAttributes(attributes, range: range)
+        
+        if let linkResult = link.result {
+          switch linkResult.resultType {
+          case .link, .phoneNumber:
+            if let url = linkResult.url {
+              attributedText.addAttribute(.link, value: url, range: range)
+            }
+          default: break
+          }
+        }
       }
       return attributedText
     }

@@ -27,7 +27,7 @@ final class ViewController: UIViewController {
     super.viewDidLoad()
     serialQueue.async { [weak self] in
       guard let self else { return }
-      for i in 0...50 {
+      for i in 0...0 {
         let data = data[i % data.count]
         cells.append(AsyncUILabel.TextUtility.shared.detectLinkAndUpdateCacheData(
           string: data,
@@ -105,6 +105,14 @@ extension ViewController: TestUILabelAsyncDelegate {
 }
 
 extension ViewController: AsyncUILabelDelegate {
+  func asynUILabel(_ label: AsyncUILabel, didTapLinkWith url: URL) {
+    print(url)
+  }
+
+  func asynUILabel(didTapLabelWith label: AsyncUILabel) {
+    print("did tap label")
+  }
+
   func asynUILabel(didUpdateLabelWith label: AsyncUILabel) {
     tableView.performBatchUpdates(nil)
   }
