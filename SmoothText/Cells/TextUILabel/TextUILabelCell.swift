@@ -10,7 +10,8 @@ import UIKit
 final class TextUILabelCell: UITableViewCell {
   @IBOutlet weak var lbLabel: AsyncUILabel!
 
-  func configure(text: NSAttributedString) {
+  func configure(text: NSAttributedString, textUtility: AsyncUILabel.TextUtility) {
+    lbLabel.textUtility = textUtility
     lbLabel.attributedText = text
   }
 }
@@ -70,7 +71,7 @@ final class TestUILabelAsync: UILabel {
       if let textData {
         return CGRect(x: bounds.origin.x, y: bounds.origin.y, width: textData.size.width, height: textData.size.height)
       } else {
-        return super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
+        return bounds //super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
       }
     } else {
       return super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)

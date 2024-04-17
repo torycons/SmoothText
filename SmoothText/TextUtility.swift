@@ -79,6 +79,9 @@ struct TextData: Equatable {
 final class TextCacheImp: TextCache {
   class CacheData {
     var sizes: [CGFloat: TextData] = [:]
+    // [TextData] => TextData + Size + NumberOfLines
+    // [sizes: TextData] => TextData + NumberOfLines
+    // [sizes: [numberOflines: TextData]
   }
 
   private let cache: NSCache<NSAttributedString, CacheData> = NSCache()

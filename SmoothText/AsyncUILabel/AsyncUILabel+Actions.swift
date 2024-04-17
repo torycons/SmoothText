@@ -36,15 +36,20 @@ extension AsyncUILabel {
   }
 
   private func getStringIndex(point: CGPoint) -> Int? {
-    guard let textData,
-          let lines = CTFrameGetLines(textData.textFrame) as? [CTLine] else { return nil }
+    guard let attributedText else { return nil }
+    let textRect = textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
+    let framesetter = CTFramesetterCreateWithAttributedString(attributedText as CFAttributedString)
+    let path = CGMutablePath()
+    path.addRect(textRect)
+    let frame = CTFramesetterCreateFrame(framesetter, CFRange(location: 0, length: attributedText.length), path, nil)
+    
+    guard let lines = CTFrameGetLines(frame) as? [CTLine] else { return nil }
 
     var index: Int? = nil
     var lineOrigins = Array(repeating: CGPoint.zero, count: lines.count)
-    CTFrameGetLineOrigins(textData.textFrame, CFRangeMake(0, numberOfLines), &lineOrigins)
-    let textRect = textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
-    var relativePoint = CGPoint(x: point.x - textRect.origin.x, y: point.y - textRect.origin.y)
-    relativePoint = CGPoint(x: relativePoint.x, y: textRect.size.height - relativePoint.y)
+    CTFrameGetLineOrigins(frame, CFRangeMake(0, numberOfLines), &lineOrigins)
+
+    let relativePoint = CGPoint(x: point.x, y: textRect.size.height - point.y)
 
     for i in 0...lines.count {
       var lineOrigin = lineOrigins[i]
@@ -56,7 +61,7 @@ extension AsyncUILabel {
       let yMin = floor(lineOrigin.y - descent)
       let yMax = ceil(lineOrigin.y + ascent)
 
-      let penOffset = CGFloat(CTLineGetPenOffsetForFlush(line, flushFactor, textData.textSize.width))
+      let penOffset = CGFloat(CTLineGetPenOffsetForFlush(line, flushFactor, textRect.width))
       lineOrigin.x = penOffset
 
       guard relativePoint.y <= yMax else {

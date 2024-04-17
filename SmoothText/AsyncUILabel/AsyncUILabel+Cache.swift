@@ -16,37 +16,41 @@ protocol AsyncUILabelTextCache {
 }
 
 extension AsyncUILabel {
-  struct TextData: Equatable {
+  struct TextData {
     let attrString: NSAttributedString
     let viewFullWidth: CGFloat
     let textFrame: CTFrame
     let textSize: CGSize
+    let customTrailing: CustomTrailling?
   }
 
   final class TextCache: AsyncUILabelTextCache {
     class CacheData {
-      var sizes: [CGFloat: TextData] = [:]
+      var data: [TextData] = []
     }
 
     private let queue = DispatchQueue(label: "com.asynclabel.cache")
     private let cache: NSCache<NSAttributedString, CacheData> = NSCache()
 
     func update(key: NSAttributedString, width: CGFloat, textData: TextData) {
-      if let data = cache.object(forKey: key) {
-        queue.async {
-          data.sizes[width] = textData
+      queue.async { [weak self] in
+        guard let self else { return }
+        if let data = cache.object(forKey: key) {
+          var newData = data.data.filter({ $0.viewFullWidth != width })
+          newData.append(textData)
+          data.data = newData
+        } else {
+          let newCacheData = CacheData()
+          newCacheData.data = [textData]
+          cache.setObject(newCacheData, forKey: key)
         }
-      } else {
-        let newCacheData = CacheData()
-        newCacheData.sizes[width] = textData
-        cache.setObject(newCacheData, forKey: key)
       }
     }
 
     func get(key: NSAttributedString, width: CGFloat) -> TextData? {
       if let data = cache.object(forKey: key) {
         return queue.sync {
-          data.sizes[width]
+          data.data.first(where: { $0.viewFullWidth == width })
         }
       }
       return nil

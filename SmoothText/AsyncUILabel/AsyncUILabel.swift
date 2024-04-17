@@ -13,8 +13,16 @@ public class AsyncUILabel: UILabel {
   weak var delegate: AsyncUILabelDelegate?
   private(set) var textData: TextData?
 
+  var textUtility: TextUtility?
+
+  var customTrailing: CustomTrailling? = nil {
+    didSet {
+      delegate?.asynUILabel(didUpdateLabelWith: self)
+    }
+  }
+
   public override func drawText(in rect: CGRect) {
-    if let attributedText, let textData = TextUtility.shared.getTextData(attrString: attributedText, width: bounds.width, completion: nil) {
+    if let textData {
       guard let context = UIGraphicsGetCurrentContext() else { return }
       context.textMatrix = .identity
       context.translateBy(x: 0, y: textData.textSize.height)
@@ -26,18 +34,14 @@ public class AsyncUILabel: UILabel {
   }
 
   public override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
-    if let attributedText {
-      let textData = TextUtility.shared.getTextData(attrString: attributedText, width: bounds.width) { textData in
-        self.attributedText = nil
-        self.attributedText = textData.attrString
-        self.delegate?.asynUILabel(didUpdateLabelWith: self)
-      }
-      if let textData {
-        self.textData = textData
-        return CGRect(x: bounds.origin.x, y: bounds.origin.y, width: textData.textSize.width, height: textData.textSize.height)
-      } else {
-        return super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
-      }
+    if let attributedText, let textUtility {
+      let textData = textUtility.getTextData(
+        attrString: attributedText,
+        numberOfLines: numberOfLines,
+        customTrailing: customTrailing,
+        width: bounds.width)
+      self.textData = textData
+      return CGRect(x: bounds.origin.x, y: bounds.origin.y, width: textData.textSize.width, height: textData.textSize.height)
     } else {
       return super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
     }
