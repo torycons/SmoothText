@@ -11,14 +11,15 @@ import UIKit
 
 protocol AsyncUILabelTextCache {
   func update(key: NSAttributedString, width: CGFloat, textData: AsyncUILabel.TextData)
-  func get(key: NSAttributedString, width: CGFloat) -> AsyncUILabel.TextData?
+  func get(key: NSAttributedString, width: CGFloat, numberOfLines: Int) -> AsyncUILabel.TextData?
   func clearAllCacheData()
 }
 
 extension AsyncUILabel {
   struct TextData {
     let attrString: NSAttributedString
-    let viewFullWidth: CGFloat
+    let viewWidth: CGFloat
+    let numberOfLines: Int
     let textFrame: CTFrame
     let textSize: CGSize
     let customTrailing: CustomTrailling?
@@ -36,7 +37,7 @@ extension AsyncUILabel {
       queue.async { [weak self] in
         guard let self else { return }
         if let data = cache.object(forKey: key) {
-          var newData = data.data.filter({ $0.viewFullWidth != width })
+          var newData = data.data.filter({ $0.viewWidth != width })
           newData.append(textData)
           data.data = newData
         } else {
@@ -47,15 +48,14 @@ extension AsyncUILabel {
       }
     }
 
-    func get(key: NSAttributedString, width: CGFloat) -> TextData? {
+    func get(key: NSAttributedString, width: CGFloat, numberOfLines: Int) -> TextData? {
       if let data = cache.object(forKey: key) {
         return queue.sync {
-          data.data.first(where: { $0.viewFullWidth == width })
+          data.data.first(where: { $0.viewWidth == width && $0.numberOfLines == numberOfLines })
         }
       }
       return nil
     }
-
     func clearAllCacheData() {
       cache.removeAllObjects()
     }

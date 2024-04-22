@@ -21,6 +21,7 @@
 		F3B432512BAC44530055907B /* CTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B432502BAC44530055907B /* CTView.swift */; };
 		F3B432532BAC445B0055907B /* CTView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B432522BAC445B0055907B /* CTView.xib */; };
 		F3B432552BAC44F40055907B /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B432542BAC44F40055907B /* ConstraintView.swift */; };
+		F3C019E92BD6627000D4F26E /* TruncateTextService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C019E82BD6627000D4F26E /* TruncateTextService.swift */; };
 		F3C04D5E2BA9503100C617D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C04D5D2BA9503100C617D4 /* AppDelegate.swift */; };
 		F3C04D602BA9503100C617D4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C04D5F2BA9503100C617D4 /* SceneDelegate.swift */; };
 		F3C04D622BA9503100C617D4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C04D612BA9503100C617D4 /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 		F3B432502BAC44530055907B /* CTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTView.swift; sourceTree = "<group>"; };
 		F3B432522BAC445B0055907B /* CTView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CTView.xib; sourceTree = "<group>"; };
 		F3B432542BAC44F40055907B /* ConstraintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstraintView.swift; sourceTree = "<group>"; };
+		F3C019E82BD6627000D4F26E /* TruncateTextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TruncateTextService.swift; sourceTree = "<group>"; };
 		F3C04D5A2BA9503100C617D4 /* SmoothText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmoothText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3C04D5D2BA9503100C617D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3C04D5F2BA9503100C617D4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,15 +76,14 @@
 		F325BB632BC52E5B00EE489E /* AsyncUILabel */ = {
 			isa = PBXGroup;
 			children = (
+				F3C019E72BD6615800D4F26E /* TextUtility */,
+				F3C019E62BD6614A00D4F26E /* DataDetector */,
 				F325BB642BC52E8200EE489E /* AsyncUILabel.swift */,
 				F325BB662BC52ED500EE489E /* AsyncUILabel+Actions.swift */,
 				F325BB682BC52F5B00EE489E /* AsyncUILabel+Delegate.swift */,
 				F325BB6A2BC52F6F00EE489E /* AsyncUILabel+Links.swift */,
 				F325BB6C2BC52F8200EE489E /* AsyncUILabel+Cache.swift */,
 				F336ED892BC5447100D830A8 /* AsyncUILabel+Utility.swift */,
-				F333E7502BD654B400872432 /* URLLinkDetector.swift */,
-				F333E7522BD6552000872432 /* UsernameMarkdownLinkDetector.swift */,
-				F333E7542BD6552C00872432 /* LabelTextDetector.swift */,
 			);
 			path = AsyncUILabel;
 			sourceTree = "<group>";
@@ -112,6 +113,24 @@
 				F3B432522BAC445B0055907B /* CTView.xib */,
 			);
 			path = CTView;
+			sourceTree = "<group>";
+		};
+		F3C019E62BD6614A00D4F26E /* DataDetector */ = {
+			isa = PBXGroup;
+			children = (
+				F333E7502BD654B400872432 /* URLLinkDetector.swift */,
+				F333E7522BD6552000872432 /* UsernameMarkdownLinkDetector.swift */,
+				F333E7542BD6552C00872432 /* LabelTextDetector.swift */,
+			);
+			path = DataDetector;
+			sourceTree = "<group>";
+		};
+		F3C019E72BD6615800D4F26E /* TextUtility */ = {
+			isa = PBXGroup;
+			children = (
+				F3C019E82BD6627000D4F26E /* TruncateTextService.swift */,
+			);
+			path = TextUtility;
 			sourceTree = "<group>";
 		};
 		F3C04D512BA9503100C617D4 = {
@@ -244,6 +263,7 @@
 				F336ED8A2BC5447100D830A8 /* AsyncUILabel+Utility.swift in Sources */,
 				F3F270B92BB6C0EE006FEC61 /* TextUtility.swift in Sources */,
 				F325BB672BC52ED500EE489E /* AsyncUILabel+Actions.swift in Sources */,
+				F3C019E92BD6627000D4F26E /* TruncateTextService.swift in Sources */,
 				F3C04D752BA95D7F00C617D4 /* TextUILabelCell.swift in Sources */,
 				F333E7512BD654B400872432 /* URLLinkDetector.swift in Sources */,
 				F333E7552BD6552C00872432 /* LabelTextDetector.swift in Sources */,

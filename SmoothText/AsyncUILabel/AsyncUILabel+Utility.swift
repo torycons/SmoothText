@@ -32,11 +32,13 @@ extension AsyncUILabel {
   final class TextUtility {
     private let cache: AsyncUILabelTextCache
     private let dataDetector: TextDataDetectorService
+    private let truncate = TruncateTextService(trailingTextAttributes: [.foregroundColor: UIColor.blue])
 
     init(
       cache: AsyncUILabelTextCache = TextCache(),
       dataDetector: TextDataDetectorService = TextDataDetectorServiceImp(detectors: [
-        URLLinkDetector(checkingResultType: .link, linkAttributed: [.foregroundColor: UIColor.red])
+        URLLinkDetector(checkingResultType: .link, linkAttributed: [.foregroundColor: UIColor.red]),
+//        UsernameMarkdownLinkDetector(linkAttributed: [.foregroundColor: UIColor.red])
       ])) {
       self.cache = cache
       self.dataDetector = dataDetector
@@ -65,18 +67,16 @@ extension AsyncUILabel {
       let path = CGMutablePath()
       path.addRect(CGRect(origin: .zero, size: size))
       let ctFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, attrString.length), path, nil)
-      let textData = TextData(attrString: attrString, viewFullWidth: width, textFrame: ctFrame, textSize: size, customTrailing: customTrailing)
-//      let lines = (CTFrameGetLines(ctFrame) as? Array<CTLine>) ?? []
-//      var textData = TextData(
-//        attrString: attrString,
-//        viewFullWidth: width,
-//        coreTextLines: lines,
-//        textSize: size,
-//        customTrailing: customTrailing)
-//
-//      if numberOfLines > 0 {
-//        textData = truncateLinesIfNeeded(textData: textData, numberOfLines: numberOfLines, path: path)
-//      }
+      var textData = TextData(
+        attrString: attrString,
+        viewWidth: width,
+        numberOfLines: numberOfLines,
+        textFrame: ctFrame,
+        textSize: size,
+        customTrailing: customTrailing)
+      textData = truncate.insertTruncateText(
+        textData: textData,
+        numberOfLines: numberOfLines)
 
       if (0...max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)).contains(width) {
         self.cache.update(key: attrString, width: width, textData: textData)
@@ -114,7 +114,7 @@ extension AsyncUILabel {
 //    }
 
     func getTextData(attrString: NSAttributedString, numberOfLines: Int, customTrailing: CustomTrailling?, width: CGFloat) -> AsyncUILabel.TextData {
-      if let data = cache.get(key: attrString, width: width) {
+      if let data = cache.get(key: attrString, width: width, numberOfLines: numberOfLines) {
         return data
       } else {
         return updateTextData(

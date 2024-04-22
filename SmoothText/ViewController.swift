@@ -44,8 +44,8 @@ final class ViewController: UIViewController {
         let data = data[i % data.count]
         cells.append(textUtility.detectLinkAndUpdateCacheData(
           attributedString: NSAttributedString(string: data, attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.blue]),
-          numberOfLines: 0,
-          customTrailing: nil,
+          numberOfLines: 5,
+          customTrailing: .some(.init(textAttributes: [:], style: .continueReading)),
           width: width))
       }
       DispatchQueue.main.async { [weak self] in
