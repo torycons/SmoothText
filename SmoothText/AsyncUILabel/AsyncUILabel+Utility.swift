@@ -31,24 +31,23 @@ extension AsyncUILabel {
 
   final class TextUtility {
     private let cache: AsyncUILabelTextCache
-    private let link: AsyncUILabelLink
-  
+    private let dataDetector: TextDataDetectorService
+
     init(
       cache: AsyncUILabelTextCache = TextCache(),
-      link: AsyncUILabelLink = TextLink()) {
+      dataDetector: TextDataDetectorService = TextDataDetectorServiceImp(detectors: [
+        URLLinkDetector(checkingResultType: .link, linkAttributed: [.foregroundColor: UIColor.red])
+      ])) {
       self.cache = cache
-      self.link = link
+      self.dataDetector = dataDetector
     }
 
     func detectLinkAndUpdateCacheData(
       attributedString: NSAttributedString,
-      checkingResultType: NSTextCheckingResult.CheckingType,
       numberOfLines: Int,
       customTrailing: CustomTrailling?,
       width: CGFloat) -> NSAttributedString {
-      let deltectedString = link.detectLinks(
-        attributedText: attributedString,
-        checkingResultType: checkingResultType)
+      let deltectedString = dataDetector.detect(attributedText: attributedString)
       return updateTextData(
         attrString: deltectedString,
         numberOfLines: numberOfLines,
@@ -79,7 +78,10 @@ extension AsyncUILabel {
 //        textData = truncateLinesIfNeeded(textData: textData, numberOfLines: numberOfLines, path: path)
 //      }
 
-      self.cache.update(key: attrString, width: width, textData: textData)
+      if (0...max(UIScreen.main.bounds.width, UIScreen.main.bounds.height)).contains(width) {
+        self.cache.update(key: attrString, width: width, textData: textData)
+      }
+
       return textData
     }
 

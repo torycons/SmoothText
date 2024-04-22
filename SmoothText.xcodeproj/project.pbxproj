@@ -12,6 +12,9 @@
 		F325BB692BC52F5B00EE489E /* AsyncUILabel+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB682BC52F5B00EE489E /* AsyncUILabel+Delegate.swift */; };
 		F325BB6B2BC52F6F00EE489E /* AsyncUILabel+Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB6A2BC52F6F00EE489E /* AsyncUILabel+Links.swift */; };
 		F325BB6D2BC52F8200EE489E /* AsyncUILabel+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F325BB6C2BC52F8200EE489E /* AsyncUILabel+Cache.swift */; };
+		F333E7512BD654B400872432 /* URLLinkDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333E7502BD654B400872432 /* URLLinkDetector.swift */; };
+		F333E7532BD6552000872432 /* UsernameMarkdownLinkDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333E7522BD6552000872432 /* UsernameMarkdownLinkDetector.swift */; };
+		F333E7552BD6552C00872432 /* LabelTextDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333E7542BD6552C00872432 /* LabelTextDetector.swift */; };
 		F336ED8A2BC5447100D830A8 /* AsyncUILabel+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F336ED892BC5447100D830A8 /* AsyncUILabel+Utility.swift */; };
 		F3B4324C2BAC42770055907B /* CoreTextLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = F3B4324B2BAC42770055907B /* CoreTextLabel.xib */; };
 		F3B4324E2BAC427F0055907B /* CoreTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4324D2BAC427F0055907B /* CoreTextLabel.swift */; };
@@ -35,6 +38,9 @@
 		F325BB682BC52F5B00EE489E /* AsyncUILabel+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Delegate.swift"; sourceTree = "<group>"; };
 		F325BB6A2BC52F6F00EE489E /* AsyncUILabel+Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Links.swift"; sourceTree = "<group>"; };
 		F325BB6C2BC52F8200EE489E /* AsyncUILabel+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Cache.swift"; sourceTree = "<group>"; };
+		F333E7502BD654B400872432 /* URLLinkDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLLinkDetector.swift; sourceTree = "<group>"; };
+		F333E7522BD6552000872432 /* UsernameMarkdownLinkDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameMarkdownLinkDetector.swift; sourceTree = "<group>"; };
+		F333E7542BD6552C00872432 /* LabelTextDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextDetector.swift; sourceTree = "<group>"; };
 		F336ED892BC5447100D830A8 /* AsyncUILabel+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AsyncUILabel+Utility.swift"; sourceTree = "<group>"; };
 		F3B4324B2BAC42770055907B /* CoreTextLabel.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoreTextLabel.xib; sourceTree = "<group>"; };
 		F3B4324D2BAC427F0055907B /* CoreTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreTextLabel.swift; sourceTree = "<group>"; };
@@ -74,6 +80,9 @@
 				F325BB6A2BC52F6F00EE489E /* AsyncUILabel+Links.swift */,
 				F325BB6C2BC52F8200EE489E /* AsyncUILabel+Cache.swift */,
 				F336ED892BC5447100D830A8 /* AsyncUILabel+Utility.swift */,
+				F333E7502BD654B400872432 /* URLLinkDetector.swift */,
+				F333E7522BD6552000872432 /* UsernameMarkdownLinkDetector.swift */,
+				F333E7542BD6552C00872432 /* LabelTextDetector.swift */,
 			);
 			path = AsyncUILabel;
 			sourceTree = "<group>";
@@ -223,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F333E7532BD6552000872432 /* UsernameMarkdownLinkDetector.swift in Sources */,
 				F325BB692BC52F5B00EE489E /* AsyncUILabel+Delegate.swift in Sources */,
 				F3C04D622BA9503100C617D4 /* ViewController.swift in Sources */,
 				F3B432512BAC44530055907B /* CTView.swift in Sources */,
@@ -235,6 +245,8 @@
 				F3F270B92BB6C0EE006FEC61 /* TextUtility.swift in Sources */,
 				F325BB672BC52ED500EE489E /* AsyncUILabel+Actions.swift in Sources */,
 				F3C04D752BA95D7F00C617D4 /* TextUILabelCell.swift in Sources */,
+				F333E7512BD654B400872432 /* URLLinkDetector.swift in Sources */,
+				F333E7552BD6552C00872432 /* LabelTextDetector.swift in Sources */,
 				F3B4324E2BAC427F0055907B /* CoreTextLabel.swift in Sources */,
 				F325BB6D2BC52F8200EE489E /* AsyncUILabel+Cache.swift in Sources */,
 			);

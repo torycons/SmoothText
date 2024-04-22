@@ -25,18 +25,28 @@ final class ViewController: UIViewController {
 
   var cells: [NSAttributedString] = []
 
+  private let sizingCell = UINib(nibName: String(describing: TextUILabelCell.self), bundle: nil)
+          .instantiate(withOwner: nil, options: nil).first! as! TextUILabelCell
+
   override func viewDidLoad() {
     super.viewDidLoad()
+    sizingCell.prepareForReuse()
+    let size = sizingCell.systemLayoutSizeFitting(
+      .init(width: UIScreen.main.bounds.width, height: 0),
+      withHorizontalFittingPriority: .defaultHigh,
+      verticalFittingPriority: .defaultLow)
+    sizingCell.frame = .init(x: 0, y: 0, width: size.width, height: size.height)
+    sizingCell.layoutIfNeeded()
+    let width = sizingCell.lbLabel.bounds.width
     serialQueue.async { [weak self] in
       guard let self else { return }
       for i in 0...10 {
         let data = data[i % data.count]
         cells.append(textUtility.detectLinkAndUpdateCacheData(
           attributedString: NSAttributedString(string: data, attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.blue]),
-          checkingResultType: [.link],
           numberOfLines: 0,
           customTrailing: nil,
-          width: UIScreen.main.bounds.width))
+          width: width))
       }
       DispatchQueue.main.async { [weak self] in
         guard let self else { return }

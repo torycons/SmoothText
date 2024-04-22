@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7li-Ta-lhY" customClass="AsyncUILabel" customModule="SmoothText" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="404"/>
+                        <rect key="frame" x="20" y="0.0" width="353" height="404"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -26,8 +26,8 @@
                 <constraints>
                     <constraint firstItem="7li-Ta-lhY" firstAttribute="top" secondItem="CHA-yO-rxR" secondAttribute="top" id="9RX-T2-0Nh"/>
                     <constraint firstAttribute="bottom" secondItem="7li-Ta-lhY" secondAttribute="bottom" id="NCv-2D-OEQ"/>
-                    <constraint firstItem="7li-Ta-lhY" firstAttribute="leading" secondItem="CHA-yO-rxR" secondAttribute="leading" id="OIm-ba-6tA"/>
-                    <constraint firstAttribute="trailing" secondItem="7li-Ta-lhY" secondAttribute="trailing" id="dPX-fE-anM"/>
+                    <constraint firstItem="7li-Ta-lhY" firstAttribute="leading" secondItem="CHA-yO-rxR" secondAttribute="leading" constant="20" id="OIm-ba-6tA"/>
+                    <constraint firstAttribute="trailing" secondItem="7li-Ta-lhY" secondAttribute="trailing" constant="20" id="dPX-fE-anM"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
