@@ -85,34 +85,6 @@ extension AsyncUILabel {
       return textData
     }
 
-//    func truncateLinesIfNeeded(textData: TextData, numberOfLines: Int, path: CGMutablePath) -> TextData {
-//      guard numberOfLines > 0, textData.coreTextLines.count > 0 else { return textData }
-//
-//      let mutableTruncateString = NSMutableAttributedString(string: "\u{2026}", attributes: [.font: UIFont.systemFont(ofSize: 15)])
-//      if let customTrailing = textData.customTrailing {
-//        mutableTruncateString.append(NSAttributedString(string: customTrailing.style.title, attributes: customTrailing.textAttributes))
-//      }
-//      
-//      let truncateFramesetter = CTFramesetterCreateWithAttributedString(mutableTruncateString)
-//      let truncateFrame = CTFramesetterCreateFrame(truncateFramesetter, CFRange(location: 0, length: mutableTruncateString.length), path, nil)
-//      let truncateLines = (CTFrameGetLines(truncateFrame) as? Array<CTLine>) ?? []
-//
-//      var lines = textData.coreTextLines
-//
-//      for (index, truncateLine) in truncateLines.enumerated() {
-//        let originalIndex = numberOfLines - truncateLines.count + index
-//        let truncatedLine = CTLineCreateTruncatedLine(lines[originalIndex], textData.textSize.width, .end, truncateLine) ?? truncateLine
-//        lines[originalIndex] = truncatedLine
-//      }
-//
-//      return TextData(
-//        attrString: textData.attrString,
-//        viewFullWidth: textData.viewFullWidth,
-//        coreTextLines: lines,
-//        textSize: textData.textSize,
-//        customTrailing: textData.customTrailing)
-//    }
-
     func getTextData(attrString: NSAttributedString, numberOfLines: Int, customTrailing: CustomTrailling?, width: CGFloat) -> AsyncUILabel.TextData {
       if let data = cache.get(key: attrString, width: width, numberOfLines: numberOfLines) {
         return data

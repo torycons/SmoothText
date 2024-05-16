@@ -9,7 +9,6 @@ import Foundation
 import CoreText
 
 struct TruncateTextService {
-
   let trailingTextAttributes: [NSAttributedString.Key : Any]
 
   init(trailingTextAttributes: [NSAttributedString.Key : Any]) {

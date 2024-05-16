@@ -30,6 +30,7 @@
                     <constraint firstAttribute="trailing" secondItem="7li-Ta-lhY" secondAttribute="trailing" constant="20" id="dPX-fE-anM"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="lbLabel" destination="7li-Ta-lhY" id="C24-xa-SNM"/>
             </connections>
