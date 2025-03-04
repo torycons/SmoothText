@@ -51,7 +51,7 @@ extension AsyncUILabel {
 
     let relativePoint = CGPoint(x: point.x, y: textRect.size.height - point.y)
 
-    for i in 0...lines.count {
+    for i in 0..<lines.count {
       var lineOrigin = lineOrigins[i]
       let line = lines[i]
       var ascent: CGFloat = 0.0
